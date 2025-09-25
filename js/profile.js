@@ -1,27 +1,39 @@
 // Loading FOUND POSTS
-$(document).ready(function () {
-    console.log("DOC READY")
-    $(".user_Name_Profile").text(localStorage.getItem("userName"));
+document.addEventListener('DOMContentLoaded', function () {
+    console.log("DOC READY");
+    const userNameElement = document.querySelector(".user_Name_Profile");
+    if (userNameElement) {
+        userNameElement.textContent = localStorage.getItem("userName");
+    }
     loadUserFoundPosts();
 });
-function loadUserFoundPosts() {
+
+async function loadUserFoundPosts() {
     let userName = localStorage.getItem("userName");
     console.log(userName);
-    $.ajax({
-        url: `http://localhost:8080/api/found/loaduserpost/${userName}`,
-        method: "GET",
-        headers: {
-            "Authorization": "Bearer " + localStorage.getItem("accessToken") // if using JWT
-        },
-        success: function (response) {
-            const postsContainer = $("#postsContainer");
-            postsContainer.empty();
 
-            if (response.status === 200 && response.data && response.data.length > 0) {
-                $("#emptyState").hide();
+    try {
+        const response = await fetch(`http://localhost:8080/api/found/loaduserpost/${userName}`, {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("accessToken"),
+                "Content-Type": "application/json"
+            }
+        });
 
-                response.data.forEach(post => {
-                    const postCard = `
+        const data = await response.json();
+        const postsContainer = document.getElementById("postsContainer");
+        const emptyState = document.getElementById("emptyState");
+
+        if (!postsContainer) return;
+        postsContainer.innerHTML = '';
+
+        if (response.ok && data.status === 200 && data.data && data.data.length > 0) {
+            if (emptyState) emptyState.style.display = 'none';
+
+            data.data.forEach(post => {
+                const postCard = document.createElement('div');
+                postCard.innerHTML = `
 <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow mb-6 flex flex-col md:flex-row">
     
     <!-- Pet Image -->
@@ -74,41 +86,54 @@ function loadUserFoundPosts() {
     </div>
 </div>
 `;
-                    postsContainer.append(postCard);
-                });
-            } else {
-                $("#emptyState").show();
-            }
-        },
-        error: function () {
-            $("#emptyState").show();
+                postsContainer.appendChild(postCard);
+            });
+        } else {
+            if (emptyState) emptyState.style.display = 'block';
         }
-    });
+    } catch (error) {
+        console.error('Error loading found posts:', error);
+        const emptyState = document.getElementById("emptyState");
+        if (emptyState) emptyState.style.display = 'block';
+    }
 }
 
 // Loading LOST POSTS
-$("#lostPostsTab").on("click", function () {
-    loadUserLostPosts();
-    console.log("LOST PostsTab clicked");
-});
-function loadUserLostPosts() {
+const lostPostsTab = document.getElementById("lostPostsTab");
+if (lostPostsTab) {
+    lostPostsTab.addEventListener("click", function () {
+        loadUserLostPosts();
+        console.log("LOST PostsTab clicked");
+    });
+}
+
+async function loadUserLostPosts() {
     let userName = localStorage.getItem("userName");
     console.log(userName);
-    $.ajax({
-        url: `http://localhost:8080/api/lost/loaduserpost/${userName}`,
-        method: "GET",
-        headers: {
-            "Authorization": "Bearer " + localStorage.getItem("accessToken") // if using JWT
-        },
-        success: function (response) {
-            const postsContainer = $("#lostPostsContainer");
-            postsContainer.empty();
 
-            if (response.status === 200 && response.data && response.data.length > 0) {
-                $("#emptyState").hide();
-                console.log(response.data);
-                response.data.forEach(post => {
-                    const postCard = `
+    try {
+        const response = await fetch(`http://localhost:8080/api/lost/loaduserpost/${userName}`, {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("accessToken"),
+                "Content-Type": "application/json"
+            }
+        });
+
+        const data = await response.json();
+        const postsContainer = document.getElementById("lostPostsContainer");
+        const emptyState = document.getElementById("emptyState");
+
+        if (!postsContainer) return;
+        postsContainer.innerHTML = '';
+
+        if (response.ok && data.status === 200 && data.data && data.data.length > 0) {
+            if (emptyState) emptyState.style.display = 'none';
+            console.log(data.data);
+
+            data.data.forEach(post => {
+                const postCard = document.createElement('div');
+                postCard.innerHTML = `
 <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow mb-6 flex flex-col md:flex-row">
     
     <!-- Pet Image -->
@@ -161,179 +186,212 @@ function loadUserLostPosts() {
     </div>
 </div>
 `;
-                    postsContainer.append(postCard);
-                });
-            } else {
-                $("#emptyState").show();
-            }
-        },
-        error: function () {
-            $("#emptyState").show();
+                postsContainer.appendChild(postCard);
+            });
+        } else {
+            if (emptyState) emptyState.style.display = 'block';
         }
-    });
+    } catch (error) {
+        console.error('Error loading lost posts:', error);
+        const emptyState = document.getElementById("emptyState");
+        if (emptyState) emptyState.style.display = 'block';
+    }
 }
 
-
 // DELETE FOUND POSTS
-$(document).on('click', '.foundDeleteBtn', function () {
-    const postId = $(this).data('postid');
-    const button = $(this);
+document.addEventListener('click', async function (e) {
+    if (e.target.classList.contains('foundDeleteBtn')) {
+        const postId = e.target.getAttribute('data-postid');
+        const button = e.target;
 
-    // Show modern confirmation popup
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "This post will be permanently deleted!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'Cancel',
-        didOpen: () => {
-            // Optional: you can focus confirm button automatically
-            Swal.getConfirmButton().focus();
-        }
-    }).then((result) => {
+        // Show modern confirmation popup
+        const result = await Swal.fire({
+            title: 'Are you sure?',
+            text: "This post will be permanently deleted!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel',
+            didOpen: () => {
+                Swal.getConfirmButton().focus();
+            }
+        });
+
         if (result.isConfirmed) {
-            // Show loading popup while AJAX runs
+            // Show loading popup
             Swal.fire({
                 title: 'Deleting...',
                 allowOutsideClick: false,
                 didOpen: () => Swal.showLoading()
             });
 
-            // jQuery AJAX request
-            $.ajax({
-                url: `http://localhost:8080/api/found/delete/${postId}`,
-                method: 'DELETE',
-                headers: {
-                    "Authorization": "Bearer " + localStorage.getItem("accessToken")
-                },
-                success: function (response) {
+            try {
+                const response = await fetch(`http://localhost:8080/api/found/delete/${postId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("accessToken"),
+                        "Content-Type": "application/json"
+                    }
+                });
+
+                if (response.ok) {
                     Swal.fire(
                         'Deleted!',
                         'Your post has been deleted.',
                         'success'
                     );
-                    button.closest('.postCard').remove();
-                    loadUserFoundPosts(); // refresh list if needed
-                },
-                error: function (xhr, status, error) {
+                    const postCard = button.closest('.postCard');
+                    if (postCard) postCard.remove();
+                    loadUserFoundPosts(); // refresh list
+                } else {
+                    const errorText = await response.text();
                     Swal.fire(
                         'Error!',
-                        `Failed to delete post: ${xhr.responseText || error}`,
+                        `Failed to delete post: ${errorText}`,
                         'error'
                     );
-                    console.error("Error deleting post:", xhr.responseText || error);
                 }
-            });
+            } catch (error) {
+                Swal.fire(
+                    'Error!',
+                    `Failed to delete post: ${error.message}`,
+                    'error'
+                );
+                console.error("Error deleting post:", error);
+            }
         }
-    });
+    }
 });
 
 // DELETE LOST POSTS
-$(document).on('click', '.lostDeleteBtn', function () {
-    const postId = $(this).data('postid');
-    const button = $(this);
+document.addEventListener('click', async function (e) {
+    if (e.target.classList.contains('lostDeleteBtn')) {
+        const postId = e.target.getAttribute('data-postid');
+        const button = e.target;
 
-    // Show modern confirmation popup
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "This post will be permanently deleted!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'Cancel',
-        didOpen: () => {
-            // Optional: you can focus confirm button automatically
-            Swal.getConfirmButton().focus();
-        }
-    }).then((result) => {
+        // Show modern confirmation popup
+        const result = await Swal.fire({
+            title: 'Are you sure?',
+            text: "This post will be permanently deleted!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel',
+            didOpen: () => {
+                Swal.getConfirmButton().focus();
+            }
+        });
+
         if (result.isConfirmed) {
-            // Show loading popup while AJAX runs
+            // Show loading popup
             Swal.fire({
                 title: 'Deleting...',
                 allowOutsideClick: false,
                 didOpen: () => Swal.showLoading()
             });
 
-            // jQuery AJAX request
-            $.ajax({
-                url: `http://localhost:8080/api/lost/delete/${postId}`,
-                method: 'DELETE',
-                headers: {
-                    "Authorization": "Bearer " + localStorage.getItem("accessToken")
-                },
-                success: function (response) {
+            try {
+                const response = await fetch(`http://localhost:8080/api/lost/delete/${postId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("accessToken"),
+                        "Content-Type": "application/json"
+                    }
+                });
+
+                if (response.ok) {
                     Swal.fire(
                         'Deleted!',
                         'Your post has been deleted.',
                         'success'
                     );
-                    button.closest('.postCard').remove();
-                    loadUserLostPosts(); // refresh list if needed
-                },
-                error: function (xhr, status, error) {
+                    const postCard = button.closest('.postCard');
+                    if (postCard) postCard.remove();
+                    loadUserLostPosts(); // refresh list
+                } else {
+                    const errorText = await response.text();
                     Swal.fire(
                         'Error!',
-                        `Failed to delete post: ${xhr.responseText || error}`,
+                        `Failed to delete post: ${errorText}`,
                         'error'
                     );
-                    console.error("Error deleting post:", xhr.responseText || error);
                 }
-            });
+            } catch (error) {
+                Swal.fire(
+                    'Error!',
+                    `Failed to delete post: ${error.message}`,
+                    'error'
+                );
+                console.error("Error deleting post:", error);
+            }
         }
-    });
+    }
 });
-
-
 
 // Listen for change on any status dropdown for FoundPosts
-$(document).on('change', '.foundStatusDropdown', function () {
-    const postID = $(this).data('postid');
-    const status = $(this).val(); // get selected value
+document.addEventListener('change', async function (e) {
+    if (e.target.classList.contains('foundStatusDropdown')) {
+        const postID = e.target.getAttribute('data-postid');
+        const status = e.target.value;
 
-    $.ajax({
-        url: "http://localhost:8080/api/found/changestatus",
-        method: "PUT",
-        headers: {
-            "Authorization": "Bearer " + localStorage.getItem("accessToken") // if using JWT
-        },
-        data: { postID, status },
-        success: function (response) {
-            console.log("Status changed ", response);
-            location.reload();
-        },
-        error: function (err) {
-            console.error("Failed to change status", err);
+        try {
+            const response = await fetch("http://localhost:8080/api/found/changestatus", {
+                method: "PUT",
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("accessToken"),
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: new URLSearchParams({
+                    postID: postID,
+                    status: status
+                })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log("Status changed ", data);
+                location.reload();
+            } else {
+                console.error("Failed to change status", response.statusText);
+            }
+        } catch (error) {
+            console.error("Failed to change status", error);
         }
-    });
+    }
 });
-
 
 // Listen for change on any status dropdown for LostPosts
-$(document).on('change', '.lostStatusDropdown', function () {
-    const postID = $(this).data('postid');
-    const status = $(this).val(); // get selected value
+document.addEventListener('change', async function (e) {
+    if (e.target.classList.contains('lostStatusDropdown')) {
+        const postID = e.target.getAttribute('data-postid');
+        const status = e.target.value;
 
-    $.ajax({
-        url: "http://localhost:8080/api/lost/changestatus",
-        method: "PUT",
-        headers: {
-            "Authorization": "Bearer " + localStorage.getItem("accessToken") // if using JWT
-        },
-        data: { postID, status },
-        success: function (response) {
-            console.log("Status changed ", response);
-            location.reload();
-        },
-        error: function (err) {
-            console.error("Failed to change status", err);
+        try {
+            const response = await fetch("http://localhost:8080/api/lost/changestatus", {
+                method: "PUT",
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("accessToken"),
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: new URLSearchParams({
+                    postID: postID,
+                    status: status
+                })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log("Status changed ", data);
+                location.reload();
+            } else {
+                console.error("Failed to change status", response.statusText);
+            }
+        } catch (error) {
+            console.error("Failed to change status", error);
         }
-    });
+    }
 });
-
-
-
