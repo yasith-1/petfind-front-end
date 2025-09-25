@@ -1,0 +1,414 @@
+:root {
+    --primary-gradient: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+    --secondary-gradient: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+    --accent-gradient: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+    --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 100%);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #000;
+    overflow-x: hidden;
+}
+
+.space-grotesk {
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Animated Background */
+.bg-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    background: linear-gradient(135deg, #0a0a0a 0%, #0f1629 25%, #1e3a8a 50%, #0f172a 75%, #000 100%);
+}
+
+.floating-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.shape {
+    position: absolute;
+    background: linear-gradient(45deg, rgba(6, 182, 212, 0.1), rgba(59, 130, 246, 0.1));
+    border-radius: 50%;
+    filter: blur(40px);
+    animation: float 20s ease-in-out infinite;
+}
+
+.shape:nth-child(1) {
+    width: 350px;
+    height: 350px;
+    top: -175px;
+    left: -175px;
+    animation-delay: 0s;
+}
+
+.shape:nth-child(2) {
+    width: 450px;
+    height: 450px;
+    top: 40%;
+    right: -225px;
+    animation-delay: -7s;
+    background: linear-gradient(45deg, rgba(34, 211, 238, 0.12), rgba(14, 165, 233, 0.1));
+}
+
+.shape:nth-child(3) {
+    width: 400px;
+    height: 400px;
+    bottom: -200px;
+    left: 25%;
+    animation-delay: -14s;
+    background: linear-gradient(45deg, rgba(6, 182, 212, 0.08), rgba(8, 145, 178, 0.1));
+}
+
+.shape:nth-child(4) {
+    width: 280px;
+    height: 280px;
+    top: 15%;
+    left: 65%;
+    animation-delay: -21s;
+}
+
+.shape:nth-child(5) {
+    width: 320px;
+    height: 320px;
+    bottom: 40%;
+    right: 70%;
+    animation-delay: -10s;
+    background: linear-gradient(45deg, rgba(14, 165, 233, 0.06), rgba(59, 130, 246, 0.08));
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translate(0px, 0px) rotate(0deg) scale(1);
+    }
+
+    33% {
+        transform: translate(40px, -40px) rotate(120deg) scale(1.1);
+    }
+
+    66% {
+        transform: translate(-30px, 30px) rotate(240deg) scale(0.9);
+    }
+}
+
+/* Glass morphism container */
+.glass-container {
+    background: rgba(15, 15, 35, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.5), transparent);
+}
+
+/* Modern inputs */
+.input-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.input-field {
+    width: 100%;
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    color: #fff;
+    font-size: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: #06b6d4;
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+    box-shadow:
+        0 10px 40px rgba(6, 182, 212, 0.2),
+        0 0 0 1px rgba(6, 182, 212, 0.3);
+}
+
+.input-field::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.input-label {
+    position: absolute;
+    top: -8px;
+    left: 16px;
+    background: rgba(15, 15, 35, 0.9);
+    padding: 0 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.input-field:focus+.input-label,
+.input-field:not(:placeholder-shown)+.input-label {
+    color: #06b6d4;
+    transform: scale(0.9);
+}
+
+/* Modern buttons */
+.btn-primary {
+    background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+    border: none;
+    border-radius: 16px;
+    padding: 18px 32px;
+    font-weight: 600;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(6, 182, 212, 0.3);
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px rgba(6, 182, 212, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(-1px);
+}
+
+.btn-google {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 16px 32px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-google:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* Animated title */
+.animated-title {
+    background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #22d3ee 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 3s ease-in-out infinite;
+    background-size: 200% 200%;
+}
+
+@keyframes gradient-shift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Divider */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+}
+
+.divider span {
+    padding: 0 1rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Forgot password link */
+.forgot-password {
+    color: #06b6d4;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.forgot-password::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background: #06b6d4;
+    transition: width 0.3s ease;
+}
+
+.forgot-password:hover::after {
+    width: 100%;
+}
+
+.forgot-password:hover {
+    color: #22d3ee;
+}
+
+/* Welcome message */
+.welcome-badge {
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+    border: 1px solid rgba(6, 182, 212, 0.2);
+    border-radius: 12px;
+    padding: 12px 20px;
+    margin-bottom: 2rem;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.welcome-badge .icon {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .glass-container {
+        margin: 1rem;
+        border-radius: 20px;
+    }
+
+    .shape {
+        filter: blur(20px);
+    }
+
+    .input-field {
+        padding: 14px 16px;
+    }
+}
+
+/* Loading animation */
+.loading {
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    margin: auto;
+    border: 2px solid transparent;
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 1s ease infinite;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@keyframes spin {
+    0% {
+        transform: translateY(-50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
+
+/* Success animation */
+@keyframes success {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.success-animation {
+    animation: success 0.3s ease;
+}
+
+/* Eye icon for password visibility */
+.password-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.5);
+    transition: color 0.3s ease;
+}
+
+.password-toggle:hover {
+    color: #06b6d4;
+}
