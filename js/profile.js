@@ -175,7 +175,7 @@ function loadUserLostPosts() {
 
 
 // DELETE FOUND POSTS
-$(document).on('click', '.foundDeleteBtn', function() {
+$(document).on('click', '.foundDeleteBtn', function () {
     const postId = $(this).data('postid');
     const button = $(this);
 
@@ -209,7 +209,7 @@ $(document).on('click', '.foundDeleteBtn', function() {
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem("accessToken")
                 },
-                success: function(response) {
+                success: function (response) {
                     Swal.fire(
                         'Deleted!',
                         'Your post has been deleted.',
@@ -218,7 +218,7 @@ $(document).on('click', '.foundDeleteBtn', function() {
                     button.closest('.postCard').remove();
                     loadUserFoundPosts(); // refresh list if needed
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     Swal.fire(
                         'Error!',
                         `Failed to delete post: ${xhr.responseText || error}`,
@@ -232,7 +232,7 @@ $(document).on('click', '.foundDeleteBtn', function() {
 });
 
 // DELETE LOST POSTS
-$(document).on('click', '.lostDeleteBtn', function() {
+$(document).on('click', '.lostDeleteBtn', function () {
     const postId = $(this).data('postid');
     const button = $(this);
 
@@ -266,7 +266,7 @@ $(document).on('click', '.lostDeleteBtn', function() {
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem("accessToken")
                 },
-                success: function(response) {
+                success: function (response) {
                     Swal.fire(
                         'Deleted!',
                         'Your post has been deleted.',
@@ -275,7 +275,7 @@ $(document).on('click', '.lostDeleteBtn', function() {
                     button.closest('.postCard').remove();
                     loadUserLostPosts(); // refresh list if needed
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     Swal.fire(
                         'Error!',
                         `Failed to delete post: ${xhr.responseText || error}`,
@@ -291,7 +291,7 @@ $(document).on('click', '.lostDeleteBtn', function() {
 
 
 // Listen for change on any status dropdown for FoundPosts
-$(document).on('change', '.foundStatusDropdown', function() {
+$(document).on('change', '.foundStatusDropdown', function () {
     const postID = $(this).data('postid');
     const status = $(this).val(); // get selected value
 
@@ -302,11 +302,11 @@ $(document).on('change', '.foundStatusDropdown', function() {
             "Authorization": "Bearer " + localStorage.getItem("accessToken") // if using JWT
         },
         data: { postID, status },
-        success: function(response) {
+        success: function (response) {
             console.log("Status changed ", response);
             location.reload();
         },
-        error: function(err) {
+        error: function (err) {
             console.error("Failed to change status", err);
         }
     });
@@ -314,7 +314,7 @@ $(document).on('change', '.foundStatusDropdown', function() {
 
 
 // Listen for change on any status dropdown for LostPosts
-$(document).on('change', '.lostStatusDropdown', function() {
+$(document).on('change', '.lostStatusDropdown', function () {
     const postID = $(this).data('postid');
     const status = $(this).val(); // get selected value
 
@@ -325,11 +325,11 @@ $(document).on('change', '.lostStatusDropdown', function() {
             "Authorization": "Bearer " + localStorage.getItem("accessToken") // if using JWT
         },
         data: { postID, status },
-        success: function(response) {
+        success: function (response) {
             console.log("Status changed ", response);
             location.reload();
         },
-        error: function(err) {
+        error: function (err) {
             console.error("Failed to change status", err);
         }
     });

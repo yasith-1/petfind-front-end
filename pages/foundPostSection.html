@@ -289,26 +289,30 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div class="space-y-3">
             <div class="flex items-center">
-              <i class="fas fa-map-marker-alt text-indigo-500 w-5"></i>
+              <!-- <i class="fas fa-map-marker-alt text-indigo-500 w-5"></i> -->
               <span id="modalLocation" class="text-gray-600 ml-3"></span>
             </div>
             <div class="flex items-center">
-              <i class="fas fa-phone text-green-500 w-5"></i>
+              <!-- <i class="fas fa-phone text-green-500 w-5"></i> -->
               <span id="modalContact" class="text-gray-600 ml-3"></span>
             </div>
             <div class="flex items-center">
-              <i class="fas fa-landmark text-purple-500 w-5"></i>
+              <!-- <i class="fas fa-landmark text-purple-500 w-5"></i> -->
               <span id="modalLandmark" class="text-gray-600 ml-3"></span>
             </div>
           </div>
           <div class="space-y-3">
             <div class="flex items-center">
-              <i class="fas fa-circle text-green-400 w-5"></i>
+              <!-- <i class="fas fa-circle text-green-400 w-5"></i> -->
               <span id="modalStatus" class="text-gray-600 ml-3 font-semibold"></span>
             </div>
             <div class="flex items-center">
-              <i class="fas fa-user text-gray-400 w-5"></i>
+              <!-- <i class="fas fa-user text-gray-400 w-5"></i> -->
               <span id="modalUser" class="text-gray-500 ml-3"></span>
+            </div>
+            <div class="flex items-center">
+              <!-- <i class="fas fa-user text-gray-400 w-5"></i> -->
+              <span id="modalDate" class="text-gray-500 ml-3"></span>
             </div>
           </div>
         </div>
@@ -345,43 +349,7 @@
   <script src="../js/main.js"></script>
   <script src="../js/foundPostSection.js"></script>
   <script src="../js/logout.js"></script>
-  <script>
-    // District-City mapping
-    const districtCities = {
-      "Colombo": ["Colombo", "Dehiwala", "Moratuwa", "Nugegoda"],
-      "Kandy": ["Kandy", "Peradeniya", "Gampola"]
-    };
-
-    const districtFilter = document.getElementById('districtFilter');
-    const cityFilter = document.getElementById('cityFilter');
-
-    districtFilter.addEventListener('change', () => {
-      const district = districtFilter.value;
-      cityFilter.innerHTML = '<option value="">All Cities</option>';
-
-      if (district && districtCities[district]) {
-        districtCities[district].forEach(city => {
-          const option = document.createElement('option');
-          option.value = city;
-          option.textContent = city;
-          cityFilter.appendChild(option);
-        });
-      }
-    });
-
-    // Profile dropdown
-    const profileBtn = document.getElementById("profileBtn");
-    const dropdownMenu = document.getElementById("dropdownMenu");
-
-    profileBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      dropdownMenu.classList.toggle("hidden");
-    });
-
-    window.addEventListener("click", () => {
-      dropdownMenu.classList.add("hidden");
-    });
-  </script>
+  
 </body>
 
 </html>
