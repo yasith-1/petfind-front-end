@@ -7,48 +7,62 @@
     <title>FindCare – Lost & Found Pets</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <!-- AOS Animation Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="../css/homePage.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/homePage.css">
+
 </head>
 
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-gray-50 text-gray-900 overflow-x-hidden">
 
     <!-- Page Loader -->
     <div class="page-loader" id="pageLoader">
         <div class="loader-content">
             <div class="spinner"></div>
-            <p class="text-lg font-semibold">Loading...</p>
+            <p class="text-xl font-semibold">Loading FindCare...</p>
         </div>
     </div>
 
     <!-- Navbar -->
-    <nav class="fixed w-full z-20 top-0 left-0 bg-white/90 backdrop-blur-md shadow-md transition-all duration-300"
+    <nav class="fixed w-full z-50 top-0 left-0 bg-white/90 backdrop-blur-md shadow-lg transition-all duration-500"
         id="mainNav">
         <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-            <h1 class="text-3xl font-bold text-indigo-600 flex items-center">
-                <i class="fas fa-paw mr-2"></i><a href="./homePage.html">FindCare</a>
-            </h1>
+            <div class="text-3xl font-bold gradient-text flex items-center">
+                <i class="fas fa-paw mr-3 text-indigo-600"></i>
+                <a href="./homePage.html" class="hover:scale-105 transition-transform duration-300">FindCare</a>
+            </div>
 
-            <div class="space-x-8 hidden md:flex">
+            <!-- Desktop Menu -->
+            <div class="space-x-8 hidden lg:flex">
                 <a href="#features"
-                    class="hover:text-indigo-600 transition-all duration-300 font-medium text-lg">Features</a>
+                    class="hover:text-indigo-600 transition-all duration-300 font-medium text-lg relative group">
+                    Features
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
+                </a>
                 <a href="#reviews"
-                    class="hover:text-indigo-600 transition-all duration-300 font-medium text-lg">Reviews</a>
-                <a href="#cta" class="hover:text-indigo-600 transition-all duration-300 font-medium text-lg">Get
-                    Started</a>
-
-                <a href="./foundPostSection.html" class="hover:text-indigo-600 transition-all duration-300 font-medium text-lg">Find Pets
+                    class="hover:text-indigo-600 transition-all duration-300 font-medium text-lg relative group">
+                    Reviews
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#cta"
+                    class="hover:text-indigo-600 transition-all duration-300 font-medium text-lg relative group">
+                    Get Started
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="./foundPostSection.html"
+                    class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg hover:scale-105 transition-all duration-300 font-medium">
+                    Find Pets
                 </a>
             </div>
 
             <!-- Profile Dropdown -->
-            <div class="relative">
-                <button id="profileBtn" class="flex items-center space-x-2 focus:outline-none">
-                    <!-- Circle with profile icon -->
+            <div class="relative hidden lg:block">
+                <button id="profileBtn" class="flex items-center space-x-2 focus:outline-none group">
                     <div
-                        class="w-12 h-12 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-lg hover:shadow-xl transition-all duration-300">
-                        <!-- Heroicon: User -->
+                        class="w-12 h-12 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -59,40 +73,80 @@
 
                 <!-- Dropdown Menu -->
                 <div id="dropdownMenu"
-                    class="hidden absolute right-0 mt-2 w-48 bg-white/95 backdrop-blur-md border rounded-2xl shadow-xl py-2">
+                    class="hidden absolute right-0 mt-3 w-56 bg-white/95 backdrop-blur-md border border-gray-200 rounded-2xl shadow-2xl py-2 transform opacity-0 scale-95 transition-all duration-200">
                     <a href="./profilePage.html"
-                        class="block px-4 py-3 hover:bg-indigo-50 rounded-lg mx-2 transition-all duration-200">👤
-                        Profile</a>
+                        class="flex items-center px-6 py-3 hover:bg-indigo-50 rounded-xl mx-2 transition-all duration-200 text-gray-700 hover:text-indigo-600">
+                        <i class="fas fa-user mr-3"></i>Profile
+                    </a>
                     <a href="./profilePage.html"
-                        class="block px-4 py-3 hover:bg-indigo-50 rounded-lg mx-2 transition-all duration-200">📝 My
-                        Posts</a>
+                        class="flex items-center px-6 py-3 hover:bg-indigo-50 rounded-xl mx-2 transition-all duration-200 text-gray-700 hover:text-indigo-600">
+                        <i class="fas fa-edit mr-3"></i>My Posts
+                    </a>
+                    <div class="border-t border-gray-200 mx-2 my-2"></div>
                     <a onclick="logout()"
-                        class="block px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg mx-2 transition-all duration-200">🚪
-                        Logout</a>
+                        class="flex items-center px-6 py-3 text-red-600 hover:bg-red-50 rounded-xl mx-2 transition-all duration-200 cursor-pointer">
+                        <i class="fas fa-sign-out-alt mr-3"></i>Logout
+                    </a>
                 </div>
             </div>
 
             <!-- Mobile Menu Button -->
-            <div class="md:hidden">
-                <button id="mobileMenuBtn" class="text-indigo-600">
-                    <i class="fas fa-bars text-xl"></i>
+            <div class="lg:hidden">
+                <button id="mobileMenuBtn" class="text-indigo-600 hover:text-indigo-800 transition-colors p-2">
+                    <i class="fas fa-bars text-2xl"></i>
                 </button>
             </div>
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobileMenu" class="hidden md:hidden bg-white/95 backdrop-blur-md shadow-lg">
-            <div class="px-6 py-4 space-y-2">
-                <a href="#features" class="block py-2 hover:text-indigo-600 transition">Features</a>
-                <a href="#reviews" class="block py-2 hover:text-indigo-600 transition">Reviews</a>
-                <a href="#cta" class="block py-2 hover:text-indigo-600 transition">Get Started</a>
+        <div id="mobileMenu" class="hidden lg:hidden bg-white/95 backdrop-blur-md shadow-xl border-t border-gray-200">
+            <div class="px-6 py-6 space-y-4">
+                <a href="#features"
+                    class="block py-3 text-lg font-medium hover:text-indigo-600 transition border-b border-gray-100">Features</a>
+                <a href="#reviews"
+                    class="block py-3 text-lg font-medium hover:text-indigo-600 transition border-b border-gray-100">Reviews</a>
+                <a href="#cta"
+                    class="block py-3 text-lg font-medium hover:text-indigo-600 transition border-b border-gray-100">Get
+                    Started</a>
+                <a href="./foundPostSection.html"
+                    class="block py-3 text-lg font-medium hover:text-indigo-600 transition border-b border-gray-100">Find
+                    Pets</a>
+
+                <!-- Mobile Profile Menu -->
+                <div class="pt-4 border-t border-gray-200">
+                    <a href="./profilePage.html"
+                        class="block py-3 text-lg font-medium hover:text-indigo-600 transition">
+                        <i class="fas fa-user mr-3"></i>Profile
+                    </a>
+                    <a href="./profilePage.html"
+                        class="block py-3 text-lg font-medium hover:text-indigo-600 transition">
+                        <i class="fas fa-edit mr-3"></i>My Posts
+                    </a>
+                    <a onclick="logout()"
+                        class="block py-3 text-lg font-medium text-red-600 hover:text-red-800 transition cursor-pointer">
+                        <i class="fas fa-sign-out-alt mr-3"></i>Logout
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section
-        class="relative bg-gradient-to-r from-indigo-600 to-purple-600 text-white pt-32 pb-24 overflow-hidden min-h-screen flex items-center">
+        class="relative bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 text-white pt-32 pb-32 overflow-hidden min-h-screen flex items-center">
+        <!-- Particles Background -->
+        <div class="particles">
+            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 20%; animation-delay: 5s;"></div>
+            <div class="particle" style="left: 30%; animation-delay: 10s;"></div>
+            <div class="particle" style="left: 40%; animation-delay: 15s;"></div>
+            <div class="particle" style="left: 50%; animation-delay: 20s;"></div>
+            <div class="particle" style="left: 60%; animation-delay: 2s;"></div>
+            <div class="particle" style="left: 70%; animation-delay: 7s;"></div>
+            <div class="particle" style="left: 80%; animation-delay: 12s;"></div>
+            <div class="particle" style="left: 90%; animation-delay: 17s;"></div>
+        </div>
+
         <!-- Background Animated Shapes -->
         <div class="floating-elements">
             <div class="floating-element"></div>
@@ -101,240 +155,585 @@
         </div>
 
         <div class="relative max-w-7xl mx-auto px-6 text-center z-10">
-            <h1 class="text-4xl md:text-7xl font-extrabold mb-10 typewriter" data-aos="fade-up">
-                Helping Pets Find Their Way Back
-            </h1>
-            <p class="text-xl max-w-3xl mx-auto mb-12 opacity-90 leading-relaxed" data-aos="fade-up"
-                data-aos-delay="200">“FindCare helps reunite lost pets with the families who love them.
-                Report, search and share—together we guide every pet safely home.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6" data-aos="zoom-in"
-                data-aos-delay="400">
-                <a href="./foundPostSection.html" class="btn-modern btn-primary-modern inline-flex items-center">
-                    <i class="fas fa-search mr-3"></i>Report a Pet
-                </a>
-                <a href="./lostPostSection.html" class="btn-modern btn-outline-modern inline-flex items-center">
-                    <i class="fas fa-heart mr-3"></i>Find Pets
-                </a>
+            <div class="fade-in">
+                <h2 class="hero-title text-5xl md:text-5xl lg:text-6xl font-black mb-8 typewriter leading-tight">
+                    Helping Pets Find Their Way Back
+                </h2>
+            </div>
+
+            <div class="fade-in fade-in-delay-1">
+                <p class="text-xl md:text-2xl max-w-4xl mx-auto mb-12 opacity-95 leading-relaxed font-light">
+                    FindCare connects hearts and homes through our compassionate community.
+                    Report, search, and share—together we guide every beloved pet safely back to their family.
+                </p>
+            </div>
+
+            <div class="fade-in fade-in-delay-2">
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-6 mb-16">
+                    <a href="./foundPostSection.html"
+                        class="btn-modern btn-primary-modern inline-flex items-center text-xl group">
+                        <i class="fas fa-search mr-3 group-hover:rotate-12 transition-transform duration-300"></i>
+                        Report a Pet
+                    </a>
+                    <a href="./lostPostSection.html"
+                        class="btn-modern btn-outline-modern inline-flex items-center text-xl group">
+                        <i class="fas fa-heart mr-3 group-hover:scale-110 transition-transform duration-300"></i>
+                        Find Pets
+                    </a>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="fade-in fade-in-delay-3">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                    <div class="glass-card p-8 text-center">
+                        <div class="text-4xl font-bold mb-2">1,200+</div>
+                        <div class="text-lg opacity-90">Pets Reunited</div>
+                    </div>
+                    <div class="glass-card p-8 text-center">
+                        <div class="text-4xl font-bold mb-2">5,000+</div>
+                        <div class="text-lg opacity-90">Community Members</div>
+                    </div>
+                    <div class="glass-card p-8 text-center">
+                        <div class="text-4xl font-bold mb-2">24/7</div>
+                        <div class="text-lg opacity-90">Support Available</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-32 bg-gradient-to-br from-gray-50 to-indigo-50">
-        <div class="max-w-6xl mx-auto px-6 text-center">
-            <h2 class="text-5xl font-extrabold mb-6 text-gray-800" data-aos="fade-down">
-                What We Offer
-            </h2>
-            <p class="text-xl text-gray-600 mb-20 max-w-3xl mx-auto" data-aos="fade-up">
-                Comprehensive pet care solutions designed to reunite families with their beloved companions
-            </p>
+    <section id="features" class="py-32 bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-5xl md:text-6xl font-black mb-8 gradient-text">
+                    Comprehensive Pet Care Solutions
+                </h2>
+                <p class="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                    Cutting-edge features designed to reunite families with their beloved companions through
+                    innovative technology and compassionate community support
+                </p>
+            </div>
 
-            <div class="grid md:grid-cols-3 gap-10">
-
-                <!-- Feature Card -->
-                <div class="service-card" data-aos="fade-up">
-                    <div class="w-20 h-20 mx-auto mb-8 flex items-center justify-center
-                    rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-2xl">
-                        <i class="fas fa-search text-2xl"></i>
+            <div class="grid lg:grid-cols-3 gap-10 mb-20">
+                <!-- Feature Card 1 -->
+                <div class="feature-card group">
+                    <div class="feature-icon bg-gradient-to-br from-indigo-500 to-purple-600">
+                        <i class="fas fa-search"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Report Lost Pets</h3>
-                    <p class="text-gray-600 text-lg leading-relaxed">
-                        Quickly create a missing pet alert with photos and details — reaching thousands instantly.
+                    <h3 class="text-2xl font-bold mb-6 text-gray-800 group-hover:text-indigo-600 transition-colors">
+                        Smart Pet Reporting
+                    </h3>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                        Create comprehensive missing pet alerts with AI-powered photo recognition,
+                        location tracking, and instant community notifications that reach thousands.
                     </p>
+                    <div
+                        class="flex items-center text-indigo-600 font-medium group-hover:translate-x-2 transition-transform">
+                        Learn more <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
                 </div>
 
-                <!-- Feature Card -->
-                <div class="service-card" data-aos="fade-up" data-aos-delay="150">
-                    <div class="w-20 h-20 mx-auto mb-8 flex items-center justify-center
-                    rounded-full bg-gradient-to-r from-green-400 to-teal-500 text-white shadow-2xl">
-                        <i class="fas fa-map-marker-alt text-2xl"></i>
+                <!-- Feature Card 2 -->
+                <div class="feature-card group">
+                    <div class="feature-icon bg-gradient-to-br from-emerald-500 to-teal-600">
+                        <i class="fas fa-map-marker-alt"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Find Found Pets</h3>
-                    <p class="text-gray-600 text-lg leading-relaxed">
-                        Browse and filter pets reported by others in your city — and help reunite them with their
-                        families.
+                    <h3 class="text-2xl font-bold mb-6 text-gray-800 group-hover:text-emerald-600 transition-colors">
+                        Advanced Search & Discovery
+                    </h3>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                        Powerful filters, real-time location mapping, and intelligent matching algorithms
+                        help you discover found pets and connect with their families quickly.
                     </p>
+                    <div
+                        class="flex items-center text-emerald-600 font-medium group-hover:translate-x-2 transition-transform">
+                        Explore features <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
                 </div>
 
-                <!-- Feature Card -->
-                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-20 h-20 mx-auto mb-8 flex items-center justify-center
-                    rounded-full bg-gradient-to-r from-pink-500 to-red-500 text-white shadow-2xl">
-                        <i class="fas fa-users text-2xl"></i>
+                <!-- Feature Card 3 -->
+                <div class="feature-card group">
+                    <div class="feature-icon bg-gradient-to-br from-pink-500 to-rose-600">
+                        <i class="fas fa-users"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Caring Community</h3>
-                    <p class="text-gray-600 text-lg leading-relaxed">
-                        Be part of a trusted network of pet lovers dedicated to helping each other and saving lives.
+                    <h3 class="text-2xl font-bold mb-6 text-gray-800 group-hover:text-pink-600 transition-colors">
+                        Trusted Community Network
+                    </h3>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                        Join a verified network of pet lovers, local shelters, and veterinarians
+                        dedicated to pet safety with built-in communication and verification systems.
                     </p>
+                    <div
+                        class="flex items-center text-pink-600 font-medium group-hover:translate-x-2 transition-transform">
+                        Join community <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Features Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+                    <div
+                        class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center text-white">
+                        <i class="fas fa-mobile-alt text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Mobile App</h4>
+                    <p class="text-gray-600">iOS & Android apps for on-the-go reporting</p>
                 </div>
 
+                <div class="text-center p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+                    <div
+                        class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center text-white">
+                        <i class="fas fa-bell text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Smart Alerts</h4>
+                    <p class="text-gray-600">Real-time notifications and updates</p>
+                </div>
+
+                <div class="text-center p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+                    <div
+                        class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center text-white">
+                        <i class="fas fa-shield-alt text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Secure Platform</h4>
+                    <p class="text-gray-600">Privacy-first with verified users</p>
+                </div>
+
+                <div class="text-center p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+                    <div
+                        class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center text-white">
+                        <i class="fas fa-chart-line text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Success Analytics</h4>
+                    <p class="text-gray-600">Track reunification success rates</p>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- Success Stories Section -->
+    <section class="py-32 bg-gradient-to-r from-indigo-600 to-purple-600 text-white relative overflow-hidden">
+        <div class="particles">
+            <div class="particle" style="left: 15%; animation-delay: 3s;"></div>
+            <div class="particle" style="left: 35%; animation-delay: 8s;"></div>
+            <div class="particle" style="left: 55%; animation-delay: 13s;"></div>
+            <div class="particle" style="left: 75%; animation-delay: 18s;"></div>
+        </div>
 
-    <!-- Ratings Section -->
-    <section id="reviews" class="py-32 bg-white">
-        <div class="max-w-6xl mx-auto px-6 text-center">
-            <h2 class="text-5xl font-bold mb-16 text-gray-800" data-aos="fade-up">Loved by Pet Owners</h2>
+        <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+            <h2 class="text-5xl md:text-6xl font-black mb-8">
+                Success Stories That Matter
+            </h2>
+            <p class="text-xl md:text-2xl mb-16 opacity-90 max-w-4xl mx-auto">
+                Real families, real reunions, real hope. Every day, FindCare helps create these heartwarming moments.
+            </p>
 
-            <div class="flex justify-center space-x-2 mb-8" data-aos="zoom-in">
-                <span class="text-yellow-400 text-4xl">★</span>
-                <span class="text-yellow-400 text-4xl">★</span>
-                <span class="text-yellow-400 text-4xl">★</span>
-                <span class="text-yellow-400 text-4xl">★</span>
-                <span class="text-yellow-400 text-4xl">★</span>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <div class="review-card" data-aos="fade-up" data-aos-delay="200">
-                    <blockquote class="italic text-gray-700 text-xl mb-6 leading-relaxed">
-                        "Thanks to FindCare, I found my lost cat in just 2 days! The community is amazing and
-                        supportive."
-                    </blockquote>
-                    <p class="font-bold text-gray-800 text-lg">– A happy pet parent</p>
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="glass-card p-8 text-left">
+                    <div class="flex items-center mb-6">
+                        <img src="https://images.unsplash.com/photo-1554456854-55a089fd4cb2?w=60&h=60&fit=crop&crop=face"
+                            alt="Pet owner" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Luna's Story</h4>
+                            <p class="opacity-75">Found in 3 hours</p>
+                        </div>
+                    </div>
+                    <p class="text-lg opacity-90 leading-relaxed">
+                        "Our golden retriever Luna went missing during a storm. Thanks to FindCare's instant alerts,
+                        a neighbor found her just 3 blocks away within hours!"
+                    </p>
                 </div>
 
-                <div class="review-card" data-aos="fade-up" data-aos-delay="400">
-                    <blockquote class="italic text-gray-700 text-xl mb-6 leading-relaxed">
-                        "I helped reunite 5 pets with their families. This platform makes it so easy to help others!"
+                <div class="glass-card p-8 text-left">
+                    <div class="flex items-center mb-6">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop&crop=face"
+                            alt="Pet owner" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Max's Journey</h4>
+                            <p class="opacity-75">Reunited after 2 weeks</p>
+                        </div>
+                    </div>
+                    <p class="text-lg opacity-90 leading-relaxed">
+                        "Max had been missing for two weeks. The FindCare community never gave up, and a volunteer
+                        found him 20 miles away at a shelter. We're forever grateful!"
+                    </p>
+                </div>
+
+                <div class="glass-card p-8 text-left">
+                    <div class="flex items-center mb-6">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616c9c1e8d6?w=60&h=60&fit=crop&crop=face"
+                            alt="Pet owner" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Bella's Miracle</h4>
+                            <p class="opacity-75">Found the same day</p>
+                        </div>
+                    </div>
+                    <p class="text-lg opacity-90 leading-relaxed">
+                        "Our cat Bella slipped out during moving day. The community response was incredible -
+                        she was safely home before sunset. FindCare truly works!"
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-5xl md:text-6xl font-black mb-8 gradient-text">
+                Loved by Pet Owners Worldwide
+            </h2>
+            <p class="text-xl md:text-2xl text-gray-600 mb-12 max-w-4xl mx-auto">
+                Join thousands of satisfied families who've found hope and help through our platform
+            </p>
+
+            <!-- Rating Display -->
+            <div class="mb-16">
+                <div class="flex justify-center items-center space-x-2 mb-6">
+                    <div class="flex space-x-1">
+                        <i class="fas fa-star text-yellow-400 text-4xl"></i>
+                        <i class="fas fa-star text-yellow-400 text-4xl"></i>
+                        <i class="fas fa-star text-yellow-400 text-4xl"></i>
+                        <i class="fas fa-star text-yellow-400 text-4xl"></i>
+                        <i class="fas fa-star text-yellow-400 text-4xl"></i>
+                    </div>
+                    <span class="text-4xl font-bold text-gray-800 ml-4">4.9</span>
+                </div>
+                <p class="text-xl text-gray-600">Based on 2,847 reviews</p>
+            </div>
+
+            <!-- Review Cards -->
+            <div class="grid lg:grid-cols-2 gap-10 max-w-6xl mx-auto mb-16">
+                <div class="review-card group">
+                    <div class="flex items-center mb-6">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face"
+                            alt="Reviewer" class="w-16 h-16 rounded-full mr-4 border-4 border-indigo-100">
+                        <div class="text-left">
+                            <h4 class="font-bold text-lg text-gray-800">Sarah Martinez</h4>
+                            <div class="flex text-yellow-400 mb-1">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="text-gray-500">Dog Owner • Los Angeles</p>
+                        </div>
+                    </div>
+                    <blockquote class="text-gray-700 text-xl leading-relaxed mb-6 text-left">
+                        "FindCare saved our family! When our Golden Retriever disappeared during a camping trip,
+                        the community rallied together. Within 48 hours, we had our Rocky back home safe.
+                        The support was overwhelming and heartwarming."
                     </blockquote>
-                    <p class="font-bold text-gray-800 text-lg">– Community Helper</p>
+                    <div class="flex items-center text-indigo-600">
+                        <i class="fas fa-check-circle mr-2"></i>
+                        <span class="font-medium">Verified Pet Parent</span>
+                    </div>
+                </div>
+
+                <div class="review-card group">
+                    <div class="flex items-center mb-6">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop&crop=face"
+                            alt="Reviewer" class="w-16 h-16 rounded-full mr-4 border-4 border-indigo-100">
+                        <div class="text-left">
+                            <h4 class="font-bold text-lg text-gray-800">Michael Chen</h4>
+                            <div class="flex text-yellow-400 mb-1">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="text-gray-500">Community Helper • New York</p>
+                        </div>
+                    </div>
+                    <blockquote class="text-gray-700 text-xl leading-relaxed mb-6 text-left">
+                        "As someone who helps find lost pets, FindCare is incredible. I've helped reunite over
+                        15 pets with their families using this platform. The tools make it so easy to coordinate
+                        search efforts and share information quickly."
+                    </blockquote>
+                    <div class="flex items-center text-emerald-600">
+                        <i class="fas fa-heart mr-2"></i>
+                        <span class="font-medium">Community Hero</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional testimonials -->
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="bg-gray-50 p-8 rounded-2xl border-l-4 border-indigo-500">
+                    <div class="text-3xl text-indigo-600 mb-4">★★★★★</div>
+                    <p class="text-gray-700 text-lg italic mb-4">
+                        "The mobile app is fantastic! Posted about my missing cat at midnight and had responses within
+                        minutes."
+                    </p>
+                    <p class="font-bold text-gray-800">— Jessica Taylor</p>
+                </div>
+
+                <div class="bg-gray-50 p-8 rounded-2xl border-l-4 border-emerald-500">
+                    <div class="text-3xl text-emerald-600 mb-4">★★★★★</div>
+                    <p class="text-gray-700 text-lg italic mb-4">
+                        "Found three lost pets in my neighborhood using FindCare. It feels amazing to help families
+                        reunite!"
+                    </p>
+                    <p class="font-bold text-gray-800">— David Rodriguez</p>
+                </div>
+
+                <div class="bg-gray-50 p-8 rounded-2xl border-l-4 border-pink-500">
+                    <div class="text-3xl text-pink-600 mb-4">★★★★★</div>
+                    <p class="text-gray-700 text-lg italic mb-4">
+                        "Simple, effective, and free. FindCare should be every pet owner's go-to emergency app."
+                    </p>
+                    <p class="font-bold text-gray-800">— Emma Wilson</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-32 bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-5xl md:text-6xl font-black mb-8 gradient-text">
+                    How FindCare Works
+                </h2>
+                <p class="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto">
+                    Simple steps to reunite pets with their families
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-12">
+                <!-- Step 1 -->
+                <div class="text-center group">
+                    <div class="relative mb-8">
+                        <div
+                            class="w-24 h-24 mx-auto bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-white text-3xl font-bold shadow-2xl group-hover:scale-110 transition-transform duration-300">
+                            1
+                        </div>
+                        <div
+                            class="absolute -top-2 -right-2 w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center">
+                            <i class="fas fa-plus text-white text-sm"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Report or Search</h3>
+                    <p class="text-gray-600 text-lg leading-relaxed">
+                        Create a detailed post with photos and information about your lost pet, or browse found pets in
+                        your area
+                    </p>
+                    <div class="mt-6">
+                        <i class="fas fa-arrow-down text-indigo-400 text-2xl animate-bounce"></i>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="text-center group">
+                    <div class="relative mb-8">
+                        <div
+                            class="w-24 h-24 mx-auto bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center text-white text-3xl font-bold shadow-2xl group-hover:scale-110 transition-transform duration-300">
+                            2
+                        </div>
+                        <div
+                            class="absolute -top-2 -right-2 w-8 h-8 bg-orange-400 rounded-full flex items-center justify-center">
+                            <i class="fas fa-users text-white text-sm"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Community Responds</h3>
+                    <p class="text-gray-600 text-lg leading-relaxed">
+                        Our caring community receives instant notifications and begins helping with the search
+                        immediately
+                    </p>
+                    <div class="mt-6">
+                        <i class="fas fa-arrow-down text-emerald-400 text-2xl animate-bounce"></i>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="text-center group">
+                    <div class="relative mb-8">
+                        <div
+                            class="w-24 h-24 mx-auto bg-gradient-to-br from-pink-500 to-red-500 rounded-full flex items-center justify-center text-white text-3xl font-bold shadow-2xl group-hover:scale-110 transition-transform duration-300">
+                            3
+                        </div>
+                        <div
+                            class="absolute -top-2 -right-2 w-8 h-8 bg-green-400 rounded-full flex items-center justify-center">
+                            <i class="fas fa-heart text-white text-sm"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Happy Reunion</h3>
+                    <p class="text-gray-600 text-lg leading-relaxed">
+                        Celebrate as families are reunited with their beloved pets through community collaboration and
+                        care
+                    </p>
+                    <div class="mt-6">
+                        <i class="fas fa-check-circle text-pink-500 text-2xl"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Call To Action -->
-    <section id="cta" class="py-32 bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-center relative">
-        <div class="max-w-4xl mx-auto px-6 relative z-10">
-            <h2 class="text-5xl font-bold mb-6" data-aos="zoom-in">Ready to Help a Pet Today?</h2>
-            <p class="mb-12 text-2xl opacity-90" data-aos="fade-up">Join the network and make a difference.</p>
-            <a href="./futureFeature.html" class="btn-modern btn-outline-modern inline-flex items-center text-xl"
-                data-aos="zoom-in" data-aos-delay="200">
-                <i class="fas fa-paw mr-3"></i>Get Started
-            </a>
+    <section id="cta"
+        class="py-32 bg-gradient-to-br from-purple-600 via-indigo-600 to-blue-600 text-white text-center relative overflow-hidden">
+        <div class="particles">
+            <div class="particle" style="left: 5%; animation-delay: 1s;"></div>
+            <div class="particle" style="left: 25%; animation-delay: 6s;"></div>
+            <div class="particle" style="left: 45%; animation-delay: 11s;"></div>
+            <div class="particle" style="left: 65%; animation-delay: 16s;"></div>
+            <div class="particle" style="left: 85%; animation-delay: 21s;"></div>
+        </div>
+
+        <div class="floating-elements">
+            <div class="floating-element" style="top: 10%; left: 5%;"></div>
+            <div class="floating-element" style="bottom: 10%; right: 5%; width: 100px; height: 100px;"></div>
+        </div>
+
+        <div class="max-w-5xl mx-auto px-6 relative z-10">
+            <h2 class="text-5xl md:text-7xl font-black mb-8 leading-tight">
+                Ready to Help a Pet Find Home?
+            </h2>
+            <p class="mb-16 text-2xl md:text-3xl opacity-95 max-w-4xl mx-auto leading-relaxed font-light">
+                Join our compassionate community and make a difference in a pet's life today.
+                Every second counts when a family is missing their beloved companion.
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-6 mb-12">
+                <a href="./foundPostSection.html"
+                    class="btn-modern btn-outline-modern inline-flex items-center text-2xl group px-12 py-6">
+                    <i class="fas fa-paw mr-4 group-hover:rotate-12 transition-transform duration-300"></i>
+                    Get Started Now
+                </a>
+                <a href="./lostPostSection.html"
+                    class="inline-flex items-center text-xl font-medium hover:text-yellow-300 transition-colors group">
+                    <span class="mr-2">Browse Found Pets</span>
+                    <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform duration-300"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                <div class="glass-card p-6">
+                    <i class="fas fa-clock text-3xl mb-4 text-yellow-300"></i>
+                    <h3 class="font-bold text-xl mb-2">24/7 Support</h3>
+                    <p class="opacity-90">Round-the-clock community assistance</p>
+                </div>
+                <div class="glass-card p-6">
+                    <i class="fas fa-shield-alt text-3xl mb-4 text-green-300"></i>
+                    <h3 class="font-bold text-xl mb-2">100% Free</h3>
+                    <p class="opacity-90">No hidden fees or premium charges</p>
+                </div>
+                <div class="glass-card p-6">
+                    <i class="fas fa-heart text-3xl mb-4 text-pink-300"></i>
+                    <h3 class="font-bold text-xl mb-2">Proven Results</h3>
+                    <p class="opacity-90">Thousands of successful reunions</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-400 py-16">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div class="md:col-span-2">
-                    <h4 class="text-2xl font-bold text-white mb-4 flex items-center">
-                        <i class="fas fa-paw mr-2 text-indigo-400"></i>FindCare
-                    </h4>
-                    <p class="text-gray-300 mb-6 text-lg leading-relaxed">
-                        Connecting lost pets with their families through community care and compassion.
+    <footer class="bg-gray-900 text-gray-300 py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-12 mb-16">
+                <!-- Brand Section -->
+                <div class="lg:col-span-2">
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-paw mr-3 text-indigo-400 text-3xl"></i>
+                        <h4 class="text-3xl font-black text-white">FindCare</h4>
+                    </div>
+                    <p class="text-gray-300 mb-8 text-lg leading-relaxed max-w-md">
+                        Connecting lost pets with their families through community care, compassion, and cutting-edge
+                        technology.
+                        Every pet deserves to find their way home.
                     </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors text-xl">
-                            <i class="fab fa-facebook-f"></i>
+                    <div class="flex space-x-6">
+                        <a href="#"
+                            class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-indigo-400 hover:bg-indigo-600 hover:text-white transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-facebook-f text-xl"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors text-xl">
-                            <i class="fab fa-twitter"></i>
+                        <a href="#"
+                            class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-indigo-400 hover:bg-indigo-600 hover:text-white transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-twitter text-xl"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors text-xl">
-                            <i class="fab fa-instagram"></i>
+                        <a href="#"
+                            class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-indigo-400 hover:bg-indigo-600 hover:text-white transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#"
+                            class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-indigo-400 hover:bg-indigo-600 hover:text-white transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-linkedin text-xl"></i>
                         </a>
                     </div>
                 </div>
 
+                <!-- Quick Links -->
                 <div>
-                    <h5 class="text-white font-semibold mb-4 text-lg">Quick Links</h5>
-                    <ul class="space-y-2">
-                        <li><a href="#features" class="hover:text-indigo-400 transition">Features</a></li>
-                        <li><a href="#reviews" class="hover:text-indigo-400 transition">Reviews</a></li>
-                        <li><a href="#cta" class="hover:text-indigo-400 transition">Get Started</a></li>
+                    <h5 class="text-white font-bold mb-6 text-xl">Quick Links</h5>
+                    <ul class="space-y-4">
+                        <li><a href="#features"
+                                class="hover:text-indigo-400 transition-colors text-lg flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right mr-2 text-sm group-hover:translate-x-1 transition-transform"></i>Features
+                            </a></li>
+                        <li><a href="#reviews"
+                                class="hover:text-indigo-400 transition-colors text-lg flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right mr-2 text-sm group-hover:translate-x-1 transition-transform"></i>Reviews
+                            </a></li>
+                        <li><a href="#cta"
+                                class="hover:text-indigo-400 transition-colors text-lg flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right mr-2 text-sm group-hover:translate-x-1 transition-transform"></i>Get
+                                Started
+                            </a></li>
+                        <li><a href="./foundPostSection.html"
+                                class="hover:text-indigo-400 transition-colors text-lg flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right mr-2 text-sm group-hover:translate-x-1 transition-transform"></i>Find
+                                Pets
+                            </a></li>
                     </ul>
                 </div>
 
+                <!-- Contact Info -->
                 <div>
-                    <h5 class="text-white font-semibold mb-4 text-lg">Contact</h5>
-                    <ul class="space-y-2">
-                        <li class="flex items-center"><i class="fas fa-phone mr-2 text-indigo-400"></i>070 457 0029</li>
-                        <li class="flex items-center"><i
-                                class="fas fa-envelope mr-2 text-indigo-400"></i>slcreations2007@gmail.com</li>
-                        <li class="flex items-center"><i class="fas fa-clock mr-2 text-indigo-400"></i> 24/7 Support
+                    <h5 class="text-white font-bold mb-6 text-xl">Contact</h5>
+                    <ul class="space-y-4">
+                        <li class="flex items-center text-lg">
+                            <i class="fas fa-phone mr-4 text-indigo-400 w-5"></i>
+                            <a href="tel:0704570029" class="hover:text-indigo-400 transition-colors">070 457 0029</a>
+                        </li>
+                        <li class="flex items-center text-lg">
+                            <i class="fas fa-envelope mr-4 text-indigo-400 w-5"></i>
+                            <a href="mailto:slcreations2007@gmail.com"
+                                class="hover:text-indigo-400 transition-colors">slcreations2007@gmail.com</a>
+                        </li>
+                        <li class="flex items-center text-lg">
+                            <i class="fas fa-clock mr-4 text-indigo-400 w-5"></i>
+                            <span>24/7 Support</span>
+                        </li>
+                        <li class="flex items-center text-lg">
+                            <i class="fas fa-map-marker-alt mr-4 text-indigo-400 w-5"></i>
+                            <span>Serving Communities Worldwide</span>
                         </li>
                     </ul>
                 </div>
             </div>
 
-            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
-                <p class="text-gray-500">© 2025 FindCare. All rights reserved.</p>
+            <!-- Bottom Section -->
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-500 text-lg mb-4 md:mb-0">
+                        © 2025 FindCare. All rights reserved. Made with ❤️ for pet lovers everywhere.
+                    </p>
+                    <div class="flex space-x-8">
+                        <a href="#" class="text-gray-500 hover:text-indigo-400 transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-gray-500 hover:text-indigo-400 transition-colors">Terms of Service</a>
+                        <a href="#" class="text-gray-500 hover:text-indigo-400 transition-colors">Cookie Policy</a>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- AOS Init -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script>
-        // Run this on page load
-        const urlParams = new URLSearchParams(window.location.search);
-        const token = urlParams.get("token");
-
-        if (token) {
-            localStorage.setItem("accessToken", token);
-            // ✅ Optionally, clean up URL so token isn't visible
-            window.history.replaceState({}, document.title, window.location.pathname);
-        }
-    </script>
-    <script src="../js/main.js"></script>
-    <script src="../js/logout.js"></script>
-
-    <script>
-        // Page Loader
-        window.addEventListener('load', function () {
-            const loader = document.getElementById('pageLoader');
-            document.body.classList.add('page-loaded');
-            setTimeout(() => {
-                loader.style.display = 'none';
-            }, 500);
-        });
-
-        AOS.init({
-            duration: 1200,
-            once: true,
-            easing: 'ease-out-cubic'
-        });
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', function () {
-            const nav = document.getElementById('mainNav');
-            if (window.scrollY > 50) {
-                nav.classList.add('navbar-scrolled');
-            } else {
-                nav.classList.remove('navbar-scrolled');
-            }
-        });
-
-        const profileBtn = document.getElementById("profileBtn");
-        const dropdownMenu = document.getElementById("dropdownMenu");
-        const mobileMenuBtn = document.getElementById("mobileMenuBtn");
-        const mobileMenu = document.getElementById("mobileMenu");
-
-        profileBtn.addEventListener("click", () => {
-            dropdownMenu.classList.toggle("hidden");
-        });
-
-        mobileMenuBtn.addEventListener("click", () => {
-            mobileMenu.classList.toggle("hidden");
-        });
-
-        // Close dropdown if clicked outside
-        window.addEventListener("click", (e) => {
-            if (!profileBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
-                dropdownMenu.classList.add("hidden");
-            }
-            if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
-                mobileMenu.classList.add("hidden");
-            }
-        });
-    </script>
+    <script src="/js/homePage.js"></script>
 </body>
 
 </html>

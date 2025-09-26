@@ -365,7 +365,7 @@ document.addEventListener('change', async function (e) {
 });
 
 // Listen for change on any status dropdown for LostPosts
-document.addEventListener('change', async function (e) {
+document.addEventListener('change', async (e) => {
     if (e.target.classList.contains('lostStatusDropdown')) {
         const postID = e.target.getAttribute('data-postid');
         const status = e.target.value;
