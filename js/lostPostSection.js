@@ -236,6 +236,7 @@ document.addEventListener("click", function (e) {
         const modalUser = document.getElementById("modalUser");
         const modalDate = document.getElementById("modalDate");
         const modalExtra = document.getElementById("modalExtra");
+        const contactOwner = document.getElementById("contact-owner");
 
         if (modalPhoto) modalPhoto.src = post.photoUrl;
         if (modalTitle) modalTitle.textContent = `${post.petType} - ${post.breed}`;
@@ -305,6 +306,11 @@ document.addEventListener("click", function (e) {
                     <span class="text-gray-600 ml-3">${post.color} • ${post.gender}</span>
                 </div>
             `;
+        }
+
+
+        if (contactOwner) {
+            contactOwner.innerHTML = `<i class="fas fa-heart mr-2"></i> <a href="tel:${post.contactNumber}">Contact Owner</a>`;
         }
 
         const postModal = document.getElementById("postModal");
